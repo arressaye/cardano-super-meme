@@ -176,15 +176,15 @@
             <input class="input-box" type="text" id="quantity" name="quantity" required>
         </div>
         <div class="content">
-            <p>- Cardano Ponzi meme coin generator using CIP-68 standard and Plutus minting policy</p>
+            <p>- Cardano super-powered decentralised, self-regulating meme coin generator using CIP-68 standard and Plutus minting policy</p>
             <p class="space-below">- Deploy meme token by filling fields and clicking Deploy</p>
             <p class="space-below"><strong>PLEASE READ CAREFULLY BEFORE PROCEEDING!</strong></p>
             <ol>
                 <li>Minting contract: deploy, mint, burn</li>
                 <li>Deployment transaction:
                     <ul class="sub-points">
-                        <li>Limited to 1 million tokens</li>
-                        <li>Mints a single CIP-68 reference token in same transaction</li>
+                        <li>Limited to exactly 1 million tokens</li>
+                        <li>Also mints a single CIP-68 reference token in same transaction</li>
                         <li>Requires ~25-30 ADA to deploy reference scripts within reference token smart contract</li>
                     </ul>
                 </li>
@@ -192,7 +192,7 @@
                     <ul class="sub-points">
                         <li>Same token policy cannot be deployed again</li>
                         <li>Perpetual, permissionless minting by anyone by providing policy ID and ticker</li>
-                        <li>CIP-68 reference token tracks mandates fixed supply cap and tracks circulating supply, last wallet minted</li>
+                        <li>CIP-68 reference token mandates fixed supply cap and tracks current circulating supply and wallet details of most recent minter</li>
                     </ul>
                 </li>
                 <li>Minting transaction:
@@ -211,7 +211,7 @@
                         <li>Burn 5% of circulating supply to withdraw ADA from reference token smart contract</li>
                     </ul>
                 </li>
-                <li>Circulating supply limits:
+                <li>Supply limit:
                     <ul class="sub-points">
                         <li>Max supply: 1 trillion</li>
                         <li>No more minting at max supply</li>
@@ -219,7 +219,7 @@
                     </ul>
                 </li>
             </ol>
-            <p class="space-below">Responsibility for accuracy lies with the user; invalid IPFS URI results in no image for token.</p>
+            <p class="space-below">Responsibility for accuracy lies with the user; invalid IPFS URI results in no image for token. Please check every field for typos before deploying your token!</p>
             <p class="space-below"><strong>DISCLAIMER:</strong> This feature is experimental and provided "as is." By using this tool, you agree to
                 assume full responsibility for any tokens minted. The creator of this tool does not endorse or support the
                 distribution, marketing, or management of tokens created using this tool. Proceed with caution and at your own risk.
