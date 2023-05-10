@@ -333,10 +333,16 @@
                     )
                     .attachMintingPolicy(MemeScriptLucid)
                     .complete()
-                    .catch(e => console.log(e))
+                    .catch(e => {
+                        document.getElementById("message-div").innerHTML += `Transaction failed to build. Please try again.<br><br><br>`;
+                        console.log(e);
+                    });
                 if (tx) {
                     document.getElementById("message-div").innerHTML += `Deployment transaction built. Awaiting signature...<br><br><br>`;
-                    const signed = await tx.sign().complete()
+                    const signed = await tx.sign().complete().catch(e => {
+                        document.getElementById("message-div").innerHTML += `Transaction failed to sign. Please try again.<br><br><br>`;
+                        console.log(e);
+                    })
                     if (signed) {
                         document.getElementById("message-div").innerHTML += `Transaction signed. Submitting...<br><br><br>`;
                         const txHash = await signed.submit().catch(e => {
@@ -368,7 +374,10 @@
                 const unit333 = toUnit(sessionStorage.getItem("token-policy"), helios.bytesToHex(helios.textToBytes(sessionStorage.getItem("ticker"))), 333);
                 const unit100 = toUnit(sessionStorage.getItem("token-policy"), helios.bytesToHex(helios.textToBytes(sessionStorage.getItem("ticker"))), 100);
                 document.getElementById("message-div").innerHTML += `${sessionStorage.getItem("ticker")} token name: ${unit333}<br>${sessionStorage.getItem("ticker")} reference token name: ${unit100}<br>`;
-                const refTokenUtxo = await lucid.utxoByUnit(unit100)
+                const refTokenUtxo = await lucid.utxoByUnit(unit100).catch(() => {
+                    document.getElementById("message-div").innerHTML += `Reference token not found. Please ensure that policy ID and ticker are correct and try again.<br><br><br>`;
+                    return;
+                })
                 const refTokenDatum = refTokenUtxo.datum;
                 const refTokenDatumJSON = JSON.parse(PlutusData.from_hex(refTokenDatum).to_json());
                 const originalMetadata = refTokenDatumJSON.fields[0];
@@ -422,10 +431,16 @@
                         [toUnit(sessionStorage.getItem("token-policy"), helios.bytesToHex(helios.textToBytes(sessionStorage.getItem("ticker"))), 333)]: BigInt(parseInt(sessionStorage.getItem("quantity")) / 10),
                     })
                     .complete()
-                    .catch(e => console.log(e))
+                    .catch(e => {
+                        document.getElementById("message-div").innerHTML += `Transaction failed to build. Please try again.<br><br><br>`;
+                        console.log(e);
+                    })
                 if (tx) {
                     document.getElementById("message-div").innerHTML += `Minting transaction built. Awaiting signature...<br><br><br>`;
-                    const signed = await tx.sign().complete()
+                    const signed = await tx.sign().complete().catch(e => {
+                        document.getElementById("message-div").innerHTML += `Transaction failed to sign. Please try again.<br><br><br>`;
+                        console.log(e);
+                    })
                     if (signed) {
                         document.getElementById("message-div").innerHTML += `Transaction signed. Submitting...<br><br><br>`;
                         const txHash = await signed.submit().catch(e => {
@@ -457,7 +472,10 @@
                 const unit333 = toUnit(sessionStorage.getItem("token-policy"), helios.bytesToHex(helios.textToBytes(sessionStorage.getItem("ticker"))), 333);
                 const unit100 = toUnit(sessionStorage.getItem("token-policy"), helios.bytesToHex(helios.textToBytes(sessionStorage.getItem("ticker"))), 100);
                 document.getElementById("message-div").innerHTML += `${sessionStorage.getItem("ticker")} token name: ${unit333}<br>${sessionStorage.getItem("ticker")} reference token name: ${unit100}<br>`;
-                const refTokenUtxo = await lucid.utxoByUnit(unit100)
+                const refTokenUtxo = await lucid.utxoByUnit(unit100).catch(() => {
+                    document.getElementById("message-div").innerHTML += `Reference token not found. Please ensure that policy ID and ticker are correct and try again.<br><br><br>`;
+                    return;
+                })
                 const refTokenDatum = refTokenUtxo.datum;
                 const refTokenDatumJSON = JSON.parse(PlutusData.from_hex(refTokenDatum).to_json());
                 const originalMetadata = refTokenDatumJSON.fields[0];
@@ -521,10 +539,16 @@
                         [unit333]: BigInt(tax),
                     })
                     .complete()
-                    .catch (e => console.log(e))
+                    .catch (e => {
+                        document.getElementById("message-div").innerHTML += `Transaction failed to build. Please try again.<br><br><br>`;
+                        console.log(e);
+                    })
                 if (tx) {
                     document.getElementById("message-div").innerHTML += `Burning transaction built. Awaiting signature...<br><br><br>`;
-                    const signed = await tx.sign().complete()
+                    const signed = await tx.sign().complete().catch(e => {
+                        document.getElementById("message-div").innerHTML += `Transaction failed to sign. Please try again.<br><br><br>`;
+                        console.log(e);
+                    })
                     if (signed) {
                         document.getElementById("message-div").innerHTML += `Transaction signed. Submitting...<br><br><br>`;
                         const txHash = await signed.submit().catch(e => {
@@ -555,7 +579,10 @@
                 const unit333 = toUnit(sessionStorage.getItem("token-policy"), helios.bytesToHex(helios.textToBytes(sessionStorage.getItem("ticker"))), 333);
                 const unit100 = toUnit(sessionStorage.getItem("token-policy"), helios.bytesToHex(helios.textToBytes(sessionStorage.getItem("ticker"))), 100);
                 document.getElementById("message-div").innerHTML += `${sessionStorage.getItem("ticker")} token name: ${unit333}<br>${sessionStorage.getItem("ticker")} reference token name: ${unit100}<br>`;
-                const refTokenUtxo = await lucid.utxoByUnit(unit100)
+                const refTokenUtxo = await lucid.utxoByUnit(unit100).catch(() => {
+                    document.getElementById("message-div").innerHTML += `Reference token not found. Please ensure that policy ID and ticker are correct and try again.<br><br><br>`;
+                    return;
+                })
                 const refTokenDatum = refTokenUtxo.datum;
                 const refTokenDatumJSON = JSON.parse(PlutusData.from_hex(refTokenDatum).to_json());
                 const originalMetadata = refTokenDatumJSON.fields[0];
