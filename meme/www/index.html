@@ -7,122 +7,144 @@
     <title>Meme Token Generator</title>
     <style>
         /* Reset some default browser styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-        /* Set the global font */
-        body {
-            font-family: Arial, sans-serif;
-        }
+    /* Set the global font */
+    body {
+        font-family: Arial, sans-serif;
+    }
 
-        /* Set up the navbar */
-        .navbar {
-            background-color: #333;
-            overflow: hidden;
-            position: sticky;
-            top: 0;
-            width: 100%;
-            z-index: 100;
-        }
+    /* Set up the navbar */
+    .navbar {
+        background-color: #333;
+        position: sticky;
+        top: 0;
+        width: 100%;
+        z-index: 100;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+    }
 
-        .navbar .nav-title {
-            color: white;
-            float: left;
-            font-size: 18px;
-            margin: 10px;
-            padding: 8px 16px;
-            text-decoration: none;
-        }
-        /* Style the navbar button */
-        .navbar .nav-button {
-            background-color: #4CAF50;
-            border: none;
-            color: white;
-            float: right;
-            font-size: 14px;
-            margin: 10px;
-            padding: 8px 16px;
-            text-align: center;
-            text-decoration: none;
-            cursor: pointer;
-        }
+    .nav-title {
+        color: white;
+        font-size: 18px;
+        text-decoration: none;
+    }
 
-        /* Set up the main container */
-        .container {
-            margin: 20px;
-        }
+    /* Style the navbar button */
+    .nav-button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        font-size: 14px;
+        padding: 8px 16px;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+    }
 
-        /* Style the input container */
-        .input-container {
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #4CAF50;
+        /* min-width: 160px; */
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 200; /* Increase z-index value */
+        list-style: none;
+        padding: 0;
+    }
+
+    .dropdown-content li {
+        padding: 12px 16px;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    /* Set up the main container */
+    .container {
+        margin: 20px;
+    }
+
+    /* Style the input container */
+    .input-container {
         display: flex;
         align-items: center;
         margin-bottom: 20px;
-        }
+    }
 
-        /* Style the input label */
-        .input-label {
+    /* Style the input label */
+    .input-label {
         font-size: 14px;
         margin-right: 10px;
-        }
+    }
 
-        /* Style the input box */
-        .input-box {
+    /* Style the input box */
+    .input-box {
         border: 1px solid #d4d4d4;
         font-size: 14px;
         padding: 5px;
-        }
+    }
 
-        /* Style the text divs */
-        .text-div {
-            margin-bottom: 20px;
-        }
+    /* Style the text divs */
+    .text-div {
+        margin-bottom: 20px;
+    }
 
-        .space-below {
-            margin-bottom: 1em;
-        }
+    .space-below {
+        margin-bottom: 1em;
+    }
 
-        .content {
-            text-align: left;
-            line-height: 1.5;
-        }
-        
-        ol {
-            counter-reset: list-counter;
-            list-style-type: none;
-            padding-left: 1.5em;
-        }
+    .content {
+        text-align: left;
+        line-height: 1.5;
+    }
+    
+    ol {
+        counter-reset: list-counter;
+        list-style-type: none;
+        padding-left: 1.5em;
+    }
 
-        ol > li {
-            counter-increment: list-counter;
-            position: relative;
-        }
+    ol > li {
+        counter-increment: list-counter;
+        position: relative;
+    }
 
-        ol > li:before {
-            content: counter(list-counter) '.';
-            position: absolute;
-            left: -1.5em;
-        }
+    ol > li:before {
+        content: counter(list-counter) '.';
+        position: absolute;
+        left: -1.5em;
+    }
 
-        .sub-points {
-            padding-left: 30px;
-        }
+    .sub-points {
+        padding-left: 30px;
+    }
 
-        /* Style the buttons */
-        .action-button {
-            background-color: #4CAF50;
-            border: none;
-            color: white;
-            cursor: pointer;
-            font-size: 14px;
-            margin: 5px;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            transition: background-color 0.3s;
-        }
+    /* Style the buttons */
+    .action-button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        cursor: pointer;
+        font-size: 14px;
+        margin: 5px;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+    }
 
         /* Change the button color on hover */
         .action-button:hover {
@@ -144,7 +166,13 @@
 <body>
     <div class="navbar">
         <div class="nav-title">Meme Token Generator</div>
-        <button id="btnConnect" class="nav-button" onclick="connect()">Connect Eternl</button>
+        <div class="dropdown">
+            <button id="btnConnect" class="nav-button">Connect Wallet</button>
+            <div class="dropdown-content">
+                <li><button class="nav-button" onclick="connect('eternl')">Eternl</button></li>
+                <li><button class="nav-button" onclick="connect('nami')">Nami</button></li>
+            </div>
+        </div>
     </div>
     <div class="container">
         <div class="input-container">
@@ -244,11 +272,11 @@
         let lucid = await Lucid.new();
         let walletApi;
 
-        window.connect = async() => {
-            const wallet = await window.cardano.eternl.enable();
+        window.connect = async(walletName) => {
+            const wallet = await window.cardano[walletName].enable();
             if (wallet) {
                 walletApi = wallet;
-                document.getElementById("btnConnect").innerHTML = "Eternl";
+                document.getElementById("btnConnect").innerHTML = walletName.charAt(0).toUpperCase() + walletName.slice(1) + " Connected";
                 lucid.selectWallet(walletApi)
                 const walletAddress = await lucid.wallet.address()
                 document.getElementById("message-div").innerHTML = "Wallet address: " + walletAddress;
